@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>programación</title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="square red" onclick="cambiarFondo('red')"></div>
+        <div class="square blue" onclick="cambiarFondo('blue')"></div>
+        <div class="square yellow" onclick="cambiarFondo('yellow')"></div>
+    </div>
+    <style>
+        .contenedor {
+            display: flex;
+        }
+
+        .square {
+            height: 100px;
+            width: 100px;
+            border: solid black 1px;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        function cambiarFondo(color) {
+            document.querySelector('body').style.background = color;
+        }
+    </script>
+</body>
+</html>
