@@ -1,0 +1,32 @@
+/* 
+font-family: "Open Sans", sans-serif;
+font-family: "Alfa Slab One", serif;
+*/
+
+footer {
+  background-color: #aaa;
+}
+
+.login-logo {
+  width: 25px;
+  margin-right: 5px;
+}
+
+.login-text {
+  vertical-align: middle;
+  }
+
+.hero {
+  background: url(../img/portada2.jpg) no-repeat;
+  background-size: cover;
+  height: 0.5vh;
+  min-height: 600px;
+  color: white;
+}
+
+h1, h2 {
+  font-family: "Alfa Slab One", serif;
+}
+
+
+
