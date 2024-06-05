@@ -3,8 +3,8 @@ font-family: "Open Sans", sans-serif;
 font-family: "Alfa Slab One", serif;
 */
 
-footer {
-  background-color: #aaa;
+html {
+  scroll-behavior: smooth;
 }
 
 .login-logo {
@@ -22,7 +22,6 @@ footer {
   height: 0.5vh;
   min-height: 600px;
   color: white;
-  margin-bottom: 50px;
 }
 
 h1,
@@ -35,10 +34,31 @@ body {
   background-color: #ffffff;
 }
 
-.card {
+.notice {
+  margin-top: 50px;
+}
+
+.card-2 {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
   border-color: #ffffff;
+  border-radius: 0;
+  padding: 20px;
+}
+
+.card {
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+
+.service {
+  background-color: #292929;
+  padding: 20px;
 }
 
 
@@ -64,4 +84,38 @@ h5 {
 .map iframe {
   width: 100%;
   aspect-ratio: 1.2;
+}
+
+#contacto {
+  background-image: url('../img/fondo.jpg');
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+}
+
+.form-container {
+  background-color: rgba(59, 59, 59, 0.8);
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.scroll-section {
+  scroll-margin-top: 100px;
+}
+
+@keyframes pulse {
+  0% { background-color: rgba(255, 0, 0, 0.5); }
+  50% { background-color: rgba(255, 0, 0, 0.8); }
+  100% { background-color: rgba(255, 0, 0, 0.5); }
+}
+
+
+.alerta {
+  display: inline-block;
+  padding: 5px 10px;
+  color: white;
+  background-color: rgba(255, 0, 0, 0.8);
+  border-radius: 5px;
+  animation: pulse 1s infinite alternate;
 }
