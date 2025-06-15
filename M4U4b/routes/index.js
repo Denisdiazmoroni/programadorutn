@@ -8,6 +8,22 @@ router.get('/', function (req, res, next) {
   res.render('index', { loginError });
 });
 
+router.get('/nosotros', function (req, res, next) {
+  res.render('nosotros');
+});
+
+router.get('/plenitud', function (req, res, next) {
+  res.render('plenitud');
+});
+
+router.get('/cdvradio', function (req, res, next) {
+  res.render('cdvradio', { layout: false });
+});
+
+router.get('/enciendepodcast', function (req, res, next) {
+  res.render('enciendepodcast', { layout: false });
+});
+
 router.post('/', async (req, res, next) => {
   var nombre = req.body.nombre;
   var apellido = req.body.apellido;
