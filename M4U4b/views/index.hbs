@@ -23,8 +23,8 @@
         style="color: inherit; text-decoration: none;">
         <h5 class="card-title">devocional diario</h5>
       </a>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-        content. This content is a little bit longer.</p>
+      <p class="card-text">Conectate cada día con la Palabra de Dios. Encontrá inspiración, fortaleza y dirección a
+        través de devocionales que hablan directo al corazón.</p>
     </div>
   </div>
 </div>
@@ -46,15 +46,15 @@
       style="color: inherit; text-decoration: none;">
       <h5 class="card-title">cdv Music</h5>
     </a>
-    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-      content. This content is a little bit longer.</p>
+    <p class="card-text">Sumergite en una playlist diseñada para levantar tu fe y acompañarte en cada momento del día.
+      ¡Adoración, energía y mensaje en cada canción!</p>
   </div>
 </div>
 </div>
 </div>
 </div>
 <div class="col">
-  <a href="http://iete.com.ar/" target="_blank" style="color: inherit; text-decoration: none;">
+  <a href="https://ibrp.com.ar/" target="_blank" style="color: inherit; text-decoration: none;">
     <div class="card">
       <div class="row g-0">
         <div class="col-md-4">
@@ -63,11 +63,11 @@
 </div>
 <div class="col-md-8">
   <div class="card-body">
-    <a href="http://iete.com.ar/" target="_blank" style="color: inherit; text-decoration: none;">
+    <a href="https://ibrp.com.ar/" target="_blank" style="color: inherit; text-decoration: none;">
       <h5 class="card-title">Escuela Joven</h5>
     </a>
-    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-      content.</p>
+    <p class="card-text">Formación bíblica y herramientas prácticas para tu vida diaria. Un espacio donde los jóvenes
+      profundizamos en la Palabra y crecemos juntos.</p>
   </div>
 </div>
 </div>
@@ -86,8 +86,8 @@
     <a href="https://www.google.com/" target="_blank" style="color: inherit; text-decoration: none;">
       <h5 class="card-title">consultoría</h5>
     </a>
-    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-      content.</p>
+    <p class="card-text">¿Tenés dudas, proyectos o desafíos? Estamos para acompañarte. Recibí orientación personalizada
+      en lo espiritual, emocional o ministerial.</p>
   </div>
 </div>
 </div>
@@ -108,9 +108,8 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">prendemos stream con Enciende Podcast</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, atque blanditiis!
-              Voluptatum laudantium dolorem hic. Dolores tenetur, officiis maiores quibusdam voluptatem consectetur
-              esse quasi suscipit veniam voluptatum nostrum possimus autem.</p>
+            <p class="card-text">¡Volvimos con todo! Enciende Podcast prende los micrófonos para charlas reales,
+              testimonios, fe sin filtro y mucho fuego. No te pierdas la próxima transmisión.</p>
             <p class="card-text">
               <small class="text-muted">
                 <a href="https://www.youtube.com/" class="link-live" target="_blank"><span class="alerta">transmisión
@@ -135,9 +134,7 @@
           <div class="card-body">
             <h5 class="card-title">Retiro de CDV JOVEN</h5>
             <p class="card-text">¡te mostramos un poco de lo que fue nuestro ultimo retiro! no te podes quedar afuera
-              del próximo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi amet rem corporis a atque!
-              Soluta, doloremque iste suscipit inventore architecto nam temporibus quae quisquam commodi ut laboriosam
-              laudantium ipsa eius</p>
+              del próximo.</p>
             <p class="card-text">
               <small class="text-muted">
                 <a href="https://www.google.com/intl/es-419_ar/forms/about/" class="link-styled"
@@ -145,6 +142,44 @@
               </small>
             </p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Últimas Novedades</h2>
+    <div class="row">
+      {{#each novedades}}
+      <div class="col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{titulo}}</h5>
+            <p class="card-text">{{subtitulo}}</p>
+            <button class="btn btn-primary ver-mas-btn" data-bs-toggle="modal" data-bs-target="#modalNovedad"
+              data-titulo="{{titulo}}" data-cuerpo="{{cuerpo}}">
+              Ver más
+            </button>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalNovedad" tabindex="-1" aria-labelledby="modalNovedadLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalNovedadLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body" id="modalNovedadCuerpo">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
@@ -189,3 +224,18 @@
         {{message}}
       </div>
     </div>
+
+    <script>
+      const modal = document.getElementById('modalNovedad');
+      modal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget;
+        const titulo = button.getAttribute('data-titulo');
+        const cuerpo = button.getAttribute('data-cuerpo');
+
+        const modalTitle = modal.querySelector('.modal-title');
+        const modalBody = modal.querySelector('.modal-body');
+
+        modalTitle.textContent = titulo;
+        modalBody.textContent = cuerpo;
+      });
+    </script>

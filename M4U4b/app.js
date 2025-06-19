@@ -4,11 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
-
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+// Importo rutas admin
+var loginAdminRouter = require('./routes/admin/login');
+var novedadesRouter = require('./routes/admin/novedades');
 
 var app = express();
 
@@ -38,9 +41,14 @@ app.use((req, res, next) => {
 // archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// rutas
+// rutas públicas
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// rutas admin
+app.use('/admin/login', loginAdminRouter);
+// La ruta base /admin carga novedadesRouter que maneja /novedades
+app.use('/admin/novedades', novedadesRouter);
 
 // manejo de 404
 app.use(function(req, res, next) {
@@ -56,4 +64,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-

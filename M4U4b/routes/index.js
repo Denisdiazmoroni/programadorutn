@@ -1,12 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
+var novedadesModel = require('../models/novedadesModel');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
+  var novedades = await novedadesModel.getNovedades();
   const loginError = req.query.loginError;
-  res.render('index', { loginError });
+  res.render('index', {
+    novedades,
+    loginError
+  });
 });
+
 
 router.get('/nosotros', function (req, res, next) {
   res.render('nosotros');

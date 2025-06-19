@@ -1,0 +1,485 @@
+/* 
+font-family: "Open Sans", sans-serif;
+font-family: "Alfa Slab One", serif;
+*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+.login-logo {
+  width: 25px;
+  margin-right: 5px;
+}
+
+.login-text {
+  vertical-align: middle;
+}
+
+.hero {
+  background: url(../img/portada.jpg) no-repeat;
+  background-size: cover;
+  min-height: 600px;
+  color: white;
+}
+
+h1,
+h2 {
+  font-family: "Alfa Slab One", serif;
+}
+
+.notice {
+  margin-top: 50px;
+}
+
+.card-2 {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border-color: #ffffff;
+  border-radius: 0;
+  padding: 20px;
+}
+
+.card {
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.service {
+  background-color: #292929;
+  padding: 20px;
+}
+
+.link-styled {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.link-live {
+  color: red;
+}
+
+h5 {
+  font-family: "Alfa Slab One", serif;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.map iframe {
+  width: 100%;
+  aspect-ratio: 1.2;
+}
+
+#contacto {
+  background-image: url('../img/fondo.jpg');
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+}
+
+.form-container {
+  background-color: rgba(59, 59, 59, 0.8);
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.scroll-section {
+  scroll-margin-top: 100px;
+}
+
+@keyframes pulse {
+  0% { background-color: rgba(255, 0, 0, 0.5); }
+  50% { background-color: rgba(255, 0, 0, 0.8); }
+  100% { background-color: rgba(255, 0, 0, 0.5); }
+}
+
+.alerta {
+  display: inline-block;
+  padding: 5px 10px;
+  color: white;
+  background-color: rgba(255, 0, 0, 0.8);
+  border-radius: 5px;
+  animation: pulse 1s infinite alternate;
+}
+
+/* === Carrusel imágenes del equipo === */
+.carousel-inner img {
+  height: 500px;         
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .carousel-inner img {
+    height: 300px;
+  }
+}
+
+.section-nosotros {
+  max-width: 900px;
+  margin: 50px auto 80px;
+  padding: 0 20px;
+  font-family: "Open Sans", sans-serif;
+  color: #222;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.section-nosotros h2 {
+  font-family: "Alfa Slab One", serif;
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: #2a2a2a;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.section-nosotros p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel-caption {
+  background-color: rgba(255, 153, 0, 0.5); 
+  padding: 15px 20px;
+  border-radius: 10px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ffffff; 
+  text-shadow: none;
+}
+
+.btn-spotify {
+  color: #1DB954; 
+  border-color: #1DB954;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-width: 2px;
+  padding: 0.6rem 1.8rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  box-shadow: 0 3px 6px var(--sombra);
+  background-color: transparent;
+}
+
+.btn-spotify:hover {
+  background-color: #1DB954;
+  color: var(--blanco);
+  box-shadow: 0 5px 15px rgba(29, 185, 84, 0.7);
+}
+
+:root {
+  --naranja: #ff7a00;
+  --negro: #121212;
+  --gris-claro: #f5f5f5;
+  --gris-medio: #444444;
+  --blanco: #fff;
+  --sombra: rgba(0, 0, 0, 0.15);
+}
+
+body {
+  background: var(--gris-claro);
+  font-family: 'Open Sans', sans-serif;
+  color: var(--negro);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--negro) !important;
+  box-shadow: 0 4px 8px var(--sombra);
+}
+
+.navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--naranja) !important;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #ff9a33 !important;
+  text-decoration: none;
+}
+
+/* Header */
+header {
+  background: url('../img/fondopodcast.PNG') center/cover no-repeat;
+  color: var(--blanco);
+  text-align: center;
+  padding: 4rem 1rem;
+  box-shadow: inset 0 -4px 8px rgba(255, 122, 0, 0.6);
+}
+
+header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 3.5rem;
+  margin-bottom: 0.3em;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-shadow: 2px 2px 8px rgba(255, 122, 0, 0.7);
+}
+
+header p {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #f3b060;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Sección descripción */
+section.container {
+  max-width: 1000px;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  background: var(--blanco);
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px var(--sombra);
+}
+
+section h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--negro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 3px solid var(--naranja);
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+section p {
+  font-size: 1.1rem;
+  color: var(--gris-medio);
+  margin-bottom: 1.2rem;
+}
+
+/* Imagen podcast */
+.img-fluid {
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.img-fluid:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(255, 122, 0, 0.5);
+}
+
+/* Episodios */
+.btn {
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-width: 2px;
+  padding: 0.6rem 1.8rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  box-shadow: 0 3px 6px var(--sombra);
+}
+
+.btn-outline-success {
+  color: var(--naranja);
+  border-color: var(--naranja);
+}
+
+.btn-outline-success:hover {
+  background-color: var(--naranja);
+  color: var(--blanco);
+  box-shadow: 0 5px 15px rgba(194, 94, 0, 0.7);
+}
+
+.btn-outline-danger {
+  color: #e03e2f;
+  border-color: #e03e2f;
+}
+
+.btn-outline-danger:hover {
+  background-color: #b41305;
+  color: var(--blanco);
+  box-shadow: 0 5px 15px rgba(224, 62, 47, 0.7);
+}
+
+
+/* Iframes */
+iframe {
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+iframe:hover {
+  box-shadow: 0 12px 36px var(--naranja);
+}
+
+/* Footer */
+footer {
+  background-color: var(--negro);
+  color: var(--gris-claro);
+  text-align: center;
+  padding: 1.4rem 1rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  box-shadow: 0 -4px 10px var(--sombra);
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  section.container {
+    padding: 1.5rem 1.5rem;
+  }
+}
+
+/* Estilos generales */
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header de Plenitud */
+.plenitud-header {
+  margin-top: 56px; 
+  background: linear-gradient(to right, #fbe9e7, #fce4ec);
+  padding: 5rem 2rem;
+  text-align: center;
+  color: #6a1b9a;
+}
+
+
+.plenitud-header h1 {
+  font-family: 'Alfa Slab One', cursive;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ad1457;
+}
+
+.plenitud-header .mensaje-mujer {
+  font-size: 1.25rem;
+  font-weight: 400;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #6a1b9a;
+}
+
+.testimonio {
+  background-color: #fff3e0;
+  padding: 3rem 2rem;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.2rem;
+  margin: 0;
+  color: #5d4037;
+}
+
+.testimonio blockquote {
+  quotes: "“" "”";
+  margin: 0;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.testimonio blockquote::before,
+.testimonio blockquote::after {
+  content: '"';
+  font-size: 2rem;
+  color: #d81b60;
+}
+
+.testimonio cite {
+  display: block;
+  margin-top: 1rem;
+  font-style: normal;
+  font-size: 1rem;
+  color: #8d6e63;
+}
+
+.btn-mujer {
+  background-color: #f48fb1;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-mujer:hover {
+  background-color: #ec407a;
+}
+
+/* Responsive ajustes */
+@media (max-width: 768px) {
+  .plenitud-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .plenitud-header .mensaje-mujer {
+    font-size: 1.1rem;
+  }
+
+  .testimonio {
+    font-size: 1rem;
+    padding: 2rem 1rem;
+  }
+
+  .btn-mujer {
+    width: 80%;
+  }
+}
+
+@media (max-width: 576px) {
+  .plenitud-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .plenitud-header .mensaje-mujer {
+    font-size: 1rem;
+  }
+
+  .testimonio {
+    font-size: 0.95rem;
+  }
+}
+section.actividades h2,
+section.galeria h2 {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.card.text-white .card-title,
+.card.text-white .card-text {
+  color: #fff !important;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}

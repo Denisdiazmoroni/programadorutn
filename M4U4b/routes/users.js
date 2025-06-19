@@ -14,8 +14,17 @@ router.post('/login', async (req, res) => {
     );
 
     if (rows.length === 1) {
-      req.session.user = { username };
-      res.redirect('/');
+      // Guardar en sesión el usuario y el ID
+      req.session.user = {
+        id: rows[0].id,
+        username: rows[0].usuario
+      };
+
+      // Mostrar en consola el login con fecha
+      const fechaHora = new Date().toLocaleString();
+      console.log(`[LOGIN] Usuario '${rows[0].usuario}' (ID: ${rows[0].id}) inició sesión el ${fechaHora}`);
+
+      res.redirect('/admin/novedades');
     } else {
       res.redirect('/?loginError=1');
     }
@@ -24,6 +33,7 @@ router.post('/login', async (req, res) => {
     res.redirect('/?loginError=1');
   }
 });
+
 
 router.get('/logout', (req, res) => {
   req.session.destroy();
