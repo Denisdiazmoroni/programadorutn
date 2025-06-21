@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 19-06-2025 a las 14:03:00
+-- Tiempo de generación: 21-06-2025 a las 20:19:50
 -- Versión del servidor: 9.1.0
 -- Versión de PHP: 8.3.14
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `novedades` (
   `subtitulo` text NOT NULL,
   `cuerpo` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `novedades`
@@ -42,7 +42,9 @@ CREATE TABLE IF NOT EXISTS `novedades` (
 
 INSERT INTO `novedades` (`id`, `titulo`, `subtitulo`, `cuerpo`) VALUES
 (1, 'Abe Bueno-Jallad de The Chosen invita al público a profundizar en la Biblia y vivir una “gran transformación”', 'Abe Bueno-Jallad, quien interpreta a Santiago el Mayor (“Big James”) en la exitosa serie “The Chosen”, compartió cómo su experiencia en el set lo ha transformado espiritual y personalmente.\r\n\r\n', 'La quinta temporada, titulada “La Última Cena”, marca el inicio del final de la serie y se adentra en los días más intensos de la vida de Jesús, preparando el camino para una película sobre la crucifixión y otra sobre la resurrección en las próximas temporadas.\r\n\r\nPara Bueno-Jallad, el alcance de la serie ha sido “surrealista”, especialmente al ver cómo jóvenes de nuevas generaciones se acercan a la historia de Jesús gracias a la producción.\r\n\r\nEl actor confesó que interpretar a un personaje bíblico le ha exigido una profunda responsabilidad y autenticidad. “Estos últimos cinco años representan la mayor investigación que he hecho en la Biblia”, explicó, detallando que estudió no solo los Evangelios, sino también el Antiguo Testamento, para comprender la perspectiva original de su personaje, que no conocía el Nuevo Testamento.'),
-(3, '“Dios está haciendo algo nuevo”', 'Pastor en Irán tiene esperanza en la caída del régimen islámico con la guerra actual', 'Yeghnazar explicó que el ataque israelí no fue una sorpresa para quienes han estado orando y escuchando al Espíritu Santo durante años. Sin embargo, reconoció la dura realidad: “Son las personas comunes quienes soportarán los fardos más pesados”. Por ello, pidió oración urgente por Irán e Israel, clamando para que los fieles de ambos países sigan llevando esperanza y vida, y para que los que sufren encuentren consuelo y libertad.');
+(3, '“Dios está haciendo algo nuevo”', 'Pastor en Irán tiene esperanza en la caída del régimen islámico con la guerra actual', 'Yeghnazar explicó que el ataque israelí no fue una sorpresa para quienes han estado orando y escuchando al Espíritu Santo durante años. Sin embargo, reconoció la dura realidad: “Son las personas comunes quienes soportarán los fardos más pesados”. Por ello, pidió oración urgente por Irán e Israel, clamando para que los fieles de ambos países sigan llevando esperanza y vida, y para que los que sufren encuentren consuelo y libertad.'),
+(5, 'prueba 1', 'prueba 1', 'prueba 1'),
+(10, 'prueba de alerta', 'prueba', 'prueba de alertas en modificar, agregar y eliminar.');
 
 -- --------------------------------------------------------
 

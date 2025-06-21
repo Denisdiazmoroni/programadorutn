@@ -50,60 +50,60 @@
     </nav>
 
 
-    <div class="container mt-5">
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow rounded-4 border-0">
+        <div class="card-body p-4">
+          <h4 class="mb-4 text-center text-primary">Modificar novedad ID: {{novedad.id}}</h4>
+          <form action="/admin/novedades/modificar" method="post">
+            <input type="hidden" name="id" value="{{novedad.id}}">
 
-        {{#if successMessage}}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{successMessage}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {{/if}}
+            <div class="mb-3">
+              <label for="titulo" class="form-label">Título</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="titulo" 
+                name="titulo" 
+                value="{{novedad.titulo}}" 
+                placeholder="Ingrese el título" 
+                required>
+            </div>
 
+            <div class="mb-3">
+              <label for="subtitulo" class="form-label">Subtítulo</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="subtitulo" 
+                name="subtitulo" 
+                value="{{novedad.subtitulo}}" 
+                placeholder="Ingrese el subtítulo" 
+                required>
+            </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
-            <h2 class="m-0">📢 Novedades</h2>
-            <a href="/admin/novedades/agregar" class="btn btn-success shadow-sm">
-                <i class="fas fa-plus me-1"></i> Nueva Novedad
-            </a>
-        </div>
+            <div class="mb-4">
+              <label for="cuerpo" class="form-label">Cuerpo</label>
+              <textarea 
+                class="form-control" 
+                id="cuerpo" 
+                name="cuerpo" 
+                rows="6" 
+                placeholder="Escriba el contenido">{{novedad.cuerpo}}</textarea>
+            </div>
 
-        {{#if novedades.length}}
-        <div class="table-responsive">
-            <table class="table table-hover align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>#</th>
-                        <th>Título</th>
-                        <th class="text-center">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each novedades}}
-                    <tr>
-                        <td class="fw-bold">{{id}}</td>
-                        <td>{{titulo}}</td>
-                        <td class="text-center">
-                            <a href="/admin/novedades/modificar/{{id}}" class="btn btn-sm btn-outline-primary me-2">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="/admin/novedades/eliminar/{{id}}" class="btn btn-sm btn-outline-danger">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+            <div class="text-end">
+              <button type="submit" class="btn btn-primary px-4">Modificar</button>
+            </div>
+          </form>
         </div>
-        {{else}}
-        <div class="alert alert-info text-center">
-            Aún no hay novedades cargadas.
-        </div>
-        {{/if}}
+      </div>
     </div>
+  </div>
+</div>
 
 
-    </div>
 
     <footer>
         <p class="text-center">diseño por diaz moroni 2024</p>
