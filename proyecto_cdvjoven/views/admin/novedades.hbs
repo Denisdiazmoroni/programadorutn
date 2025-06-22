@@ -74,14 +74,16 @@
                     <tr>
                         <th>#</th>
                         <th>Título</th>
+                        <th>Imagen</th>
                         <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{#each novedades}}
                     <tr>
-                        <td class="fw-bold">{{id}}</td>
+                        <td class="fw-bold">{{orden}}</td>
                         <td>{{titulo}}</td>
+                        <td>{{{imagen}}}</td>
                         <td class="text-center">
                             <a href="/admin/novedades/modificar/{{id}}" class="btn btn-sm btn-outline-primary me-2">
                                 <i class="fas fa-pen"></i>

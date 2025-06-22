@@ -3,7 +3,7 @@ var pool = require('../db');
 async function getNovedades() {
     var query = 'SELECT * FROM novedades';
     var [rows] = await pool.query(query);
-return rows;
+    return rows;
 }
 
 async function deleteNovedadById(id) {
@@ -38,4 +38,4 @@ async function modificarNovedadById(obj, id) {
     }
 }
 
-module.exports = { getNovedades, deleteNovedadById, insertNovedad, getNovedadById, modificarNovedadById};
+module.exports = { getNovedades, deleteNovedadById, insertNovedad, getNovedadById, modificarNovedadById };

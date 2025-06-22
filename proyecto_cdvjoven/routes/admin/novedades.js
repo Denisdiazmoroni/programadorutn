@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const novedadesModel = require('../../models/novedadesModel');
-
+var util = require('util');
+var cloudinary = require('cloudinary').v2;
+const uploader = util.promisify(cloudinary.uploader.upload);
 
 // Middleware para proteger la ruta
 function checkAuth(req, res, next) {
@@ -12,18 +14,38 @@ function checkAuth(req, res, next) {
   }
 }
 
-// Ruta protegida SIN layout
 router.get('/', checkAuth, async (req, res) => {
   try {
-    const novedades = await novedadesModel.getNovedades();
+    let novedades = await novedadesModel.getNovedades();
 
-    const successMessage = req.session.success;
-    req.session.success = null; // limpia el mensaje después de mostrarlo
+  novedades = novedades.map(novedad => {
+    if (novedad.img_id) {
+      const imagen = cloudinary.image(novedad.img_id, {
+        width: 100,
+        height: 100,
+        crop: 'fill'
+      });
+      return {
+        ...novedad,
+      imagen
+    }
+    } else {
+      return {
+        ...novedad,
+        imagen:''
+      }
+    }
+  })
+
+    novedades.forEach((n, i) => n.orden = i + 1);
+
+    const success = req.session.success;
+    delete req.session.success;
 
     res.render('admin/novedades', {
       layout: false,
       novedades,
-      successMessage
+      success
     });
   } catch (error) {
     console.error('Error al obtener novedades:', error);
@@ -34,6 +56,7 @@ router.get('/', checkAuth, async (req, res) => {
     });
   }
 });
+
 
 
 router.get('/eliminar/:id', checkAuth, async (req, res) => {
@@ -52,10 +75,16 @@ router.get('/agregar', (req, res, next) => {
 //guardar el form de agregar
 router.post('/agregar', async (req, res, next) => {
   try {
+    var img_id = '';
+    if (req.files && Object.keys(req.files).length > 0) {
+      imagen = req.files.imagen;
+      img_id = (await uploader(imagen.tempFilePath)).public_id;
+    }
+
     console.log(req.body)
 
     if (req.body.titulo != "" && req.body.subtitulo != "" && req.body.cuerpo != "") {
-      await novedadesModel.insertNovedad(req.body);
+      await novedadesModel.insertNovedad({...req.body, img_id});
       req.session.success = 'Novedad agregada correctamente.';
       res.redirect('/admin/novedades');
     } else {
@@ -73,7 +102,7 @@ router.post('/agregar', async (req, res, next) => {
       message: 'No se cargo la novedad'
     })
   }
-})
+});
 
 router.get('/modificar/:id', async (req, res, next) => {
   var id = req.params.id;

@@ -48,22 +48,39 @@
         </div>
         </div>
     </nav>
-    <div class="container" style="margin:100px auto">
-        <div class="row">
-            <div class="col-6 offset-3">
-                <h4>Agregar una nueva novedad</h4>
-                <form action="/admin/novedades/agregar" method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Titulo" name="titulo">
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" placeholder="subtitulo" name="subtitulo"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" placeholder="Cuerpo" name="cuerpo"></textarea>
-                    </div>
+    <div class="container" style="margin: 100px auto;">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+            <h4 class="mb-4">Agregar una nueva novedad</h4>
+            <form action="/admin/novedades/agregar" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Título</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder="nueva novedad">
+                </div>
+
+                <div class="mb-3">
+                    <label for="subtitulo" class="form-label">Subtítulo</label>
+                    <textarea class="form-control" id="subtitulo" name="subtitulo" rows="2" placeholder="Breve descripción..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen</label>
+                    <input class="form-control" type="file" name="imagen" id="imagen" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="cuerpo" class="form-label">Cuerpo</label>
+                    <textarea class="form-control" id="cuerpo" name="cuerpo" rows="6" placeholder="Contenido completo..."></textarea>
+                </div>
+
+                <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                </form>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
                 {{#if error}}
                 <p>{{message}}</p>

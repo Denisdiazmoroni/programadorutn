@@ -6,6 +6,8 @@ var logger = require('morgan');
 const session = require('express-session');
 require('dotenv').config();
 
+var fileUpload = require('express-fileupload');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -41,6 +43,11 @@ app.use((req, res, next) => {
 // archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+}));
+
 // rutas públicas
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -51,12 +58,12 @@ app.use('/admin/login', loginAdminRouter);
 app.use('/admin/novedades', novedadesRouter);
 
 // manejo de 404
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // manejo de errores
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);

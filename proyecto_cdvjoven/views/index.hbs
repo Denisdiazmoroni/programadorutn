@@ -153,11 +153,17 @@
       {{#each novedades}}
       <div class="col-md-6 mb-4">
         <div class="card h-100">
+          {{#if imagen}}
+          <img src="{{imagen}}" class="card-img-top img-fluid rounded-top"
+            style="height: 250px; object-fit: cover; cursor: pointer;" alt="Imagen de la novedad" data-bs-toggle="modal"
+            data-bs-target="#modalNovedad" data-titulo="{{titulo}}" data-subtitulo="{{subtitulo}}"
+            data-cuerpo="{{cuerpo}}" data-imagen="{{imagen}}" />
+          {{/if}}
           <div class="card-body">
             <h5 class="card-title">{{titulo}}</h5>
             <p class="card-text">{{subtitulo}}</p>
             <button class="btn btn-primary ver-mas-btn" data-bs-toggle="modal" data-bs-target="#modalNovedad"
-              data-titulo="{{titulo}}" data-cuerpo="{{cuerpo}}">
+              data-titulo="{{titulo}}" data-subtitulo="{{subtitulo}}" data-cuerpo="{{cuerpo}}" data-imagen="{{imagen}}">
               Ver más
             </button>
           </div>
@@ -175,8 +181,11 @@
           <h5 class="modal-title" id="modalNovedadLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
-        <div class="modal-body" id="modalNovedadCuerpo">
-          ...
+        <div class="modal-body">
+          <img id="modalNovedadImagen" src="" alt="Imagen" class="img-fluid rounded mb-3 d-block mx-auto"
+            style="max-height: 300px;">
+          <p id="modalNovedadSubtitulo" class="text-muted"></p>
+          <div id="modalNovedadCuerpo" class="mt-3"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -185,57 +194,82 @@
     </div>
   </div>
 
-  <div id="contacto" class="row py-4">
-    <div class="col-md-4 offset-md-2">
-      <h2>Visitanos</h2>
-      <div class="map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3540.0836729106704!2d-58.82161522440348!3d-27.466654316576683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94456b5d18951301%3A0x4f0df1035fd752e!2sCatedral%20de%20Vida!5e0!3m2!1ses!2sar!4v1717497147585!5m2!1ses!2sar"></iframe>
-      </div>
-    </div>
-    <div class="col-md-4 mt-4 mt-sm-0">
-      <h2>contactanos</h2>
-      <div class="form-container">
-        <form class="row g-3" action="/" method="post">
-          <div class="col col-md-6">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre">
-          </div>
-          <div class="col col-md-6">
-            <label for="apellido" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="apellido" name="apellido">
-          </div>
-          <div class="col-12">
-            <label for="email" class="form-label">email</label>
-            <input type="email" class="form-control" id="aemail" name="email" placeholder="email@email.com">
-          </div>
-          <div class="col-12">
-            <label for="tel" class="form-label">Tel</label>
-            <input type="text" class="form-control" id="tel" name="tel" placeholder="...">
-          </div>
-          <div class="col-12">
-            <label for="mensaje" class="form-label">mensaje</label>
-            <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
-          </div>
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary">enviar</button>
-          </div>
-        </form>
-        {{message}}
-      </div>
-    </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+  </div>
+</div>
+</div>
+</div>
 
-    <script>
+<div id="contacto" class="row py-4">
+  <div class="col-md-4 offset-md-2">
+    <h2>Visitanos</h2>
+    <div class="map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3540.0836729106704!2d-58.82161522440348!3d-27.466654316576683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94456b5d18951301%3A0x4f0df1035fd752e!2sCatedral%20de%20Vida!5e0!3m2!1ses!2sar!4v1717497147585!5m2!1ses!2sar"></iframe>
+    </div>
+  </div>
+  <div class="col-md-4 mt-4 mt-sm-0">
+    <h2>contactanos</h2>
+    <div class="form-container">
+      <form class="row g-3" action="/" method="post">
+        <div class="col col-md-6">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" name="nombre">
+        </div>
+        <div class="col col-md-6">
+          <label for="apellido" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="apellido" name="apellido">
+        </div>
+        <div class="col-12">
+          <label for="email" class="form-label">email</label>
+          <input type="email" class="form-control" id="aemail" name="email" placeholder="email@email.com">
+        </div>
+        <div class="col-12">
+          <label for="tel" class="form-label">Tel</label>
+          <input type="text" class="form-control" id="tel" name="tel" placeholder="...">
+        </div>
+        <div class="col-12">
+          <label for="mensaje" class="form-label">mensaje</label>
+          <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">enviar</button>
+        </div>
+      </form>
+      {{message}}
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
       const modal = document.getElementById('modalNovedad');
-      modal.addEventListener('show.bs.modal', event => {
+
+      modal.addEventListener('show.bs.modal', function (event) {
         const button = event.relatedTarget;
+
         const titulo = button.getAttribute('data-titulo');
+        const subtitulo = button.getAttribute('data-subtitulo');
         const cuerpo = button.getAttribute('data-cuerpo');
+        const imagen = button.getAttribute('data-imagen');
 
-        const modalTitle = modal.querySelector('.modal-title');
-        const modalBody = modal.querySelector('.modal-body');
+        // Título
+        document.getElementById('modalNovedadLabel').textContent = titulo;
 
-        modalTitle.textContent = titulo;
-        modalBody.textContent = cuerpo;
+        // Subtítulo
+        document.getElementById('modalNovedadSubtitulo').textContent = subtitulo;
+
+        // Cuerpo
+        document.getElementById('modalNovedadCuerpo').innerHTML = cuerpo;
+
+        // Imagen
+        const img = document.getElementById('modalNovedadImagen');
+        if (imagen && !imagen.includes('noimage.jpg')) {
+          img.src = imagen;
+          img.classList.remove('d-none');
+        } else {
+          img.classList.add('d-none');
+        }
       });
-    </script>
+    });
+  </script>
