@@ -12,10 +12,21 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 // Importo rutas admin
-var loginAdminRouter = require('./routes/admin/login');
+var loginAdminRouter = require('./routes/admin/login'); // acá está el login, usado en /users/login
 var novedadesRouter = require('./routes/admin/novedades');
 
 var app = express();
+
+const hbs = require('hbs');
+const cloudinary = require('cloudinary').v2;
+
+// Registra el helper "cloudinaryUrl"
+hbs.registerHelper('cloudinaryUrl', function (publicId, options) {
+  if (!publicId) return '';
+  // Puedes agregar opciones para la url de Cloudinary si querés, ej:
+  return cloudinary.url(publicId, { width: 300, crop: 'fill', ...options.hash });
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,11 +61,9 @@ app.use(fileUpload({
 
 // rutas públicas
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', loginAdminRouter); // login y logout
 
-// rutas admin
-app.use('/admin/login', loginAdminRouter);
-// La ruta base /admin carga novedadesRouter que maneja /novedades
+// rutas admin protegidas (solo accesibles si estás logueado)
 app.use('/admin/novedades', novedadesRouter);
 
 // manejo de 404

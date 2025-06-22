@@ -24,54 +24,43 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/#home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/#servicios">Servicios</a>
-          <li class="nav-item">
-            <a class="nav-link" href="/#novedades">Novedades</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/#contacto">Contacto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="nosotros">Nosotros</a>
-          </li>
-
+          <li class="nav-item"><a class="nav-link active" href="/#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/#servicios">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="/#novedades">Novedades</a></li>
+          <li class="nav-item"><a class="nav-link" href="/#contacto">Contacto</a></li>
+          <li class="nav-item"><a class="nav-link" href="/nosotros">Nosotros</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Programas
-            </a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Programas</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="enciendepodcast">Enciende Podcast</a></li>
-              <li><a class="dropdown-item" href="plenitud">Plenitud</a></li>
-              <li><a class="dropdown-item" href="cdvradio">cdv Radio</a></li>
+              <li><a class="dropdown-item" href="/enciendepodcast">Enciende Podcast</a></li>
+              <li><a class="dropdown-item" href="/plenitud">Plenitud</a></li>
+              <li><a class="dropdown-item" href="/cdvradio">cdv Radio</a></li>
             </ul>
           </li>
         </ul>
 
         <ul class="navbar-nav">
           {{#if user}}
-          <li class="nav-item">
-            <span class="nav-link">Hola, {{user.username}}</span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/logout">Cerrar sesión</a>
-          </li>
+            <li class="nav-item">
+              <span class="nav-link">Hola, {{user.username}}</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/logout">Cerrar sesión</a>
+            </li>
           {{else}}
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-              <img class="login-logo" src="img/logoinicio.png" alt="logo inicio" />
-              <span class="login-text">iniciar sesión</span>
-            </a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <img class="login-logo" src="/img/logoinicio.png" alt="logo inicio" />
+                <span class="login-text">Iniciar sesión</span>
+              </a>
+            </li>
           {{/if}}
         </ul>
       </div>
     </div>
   </nav>
 
+  <!-- Modal de login -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
@@ -80,23 +69,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
         <div class="modal-body">
-
           {{#if loginError}}
-          <div class="alert alert-danger" role="alert">
-            Usuario o contraseña incorrectos.
-          </div>
+            <div class="alert alert-danger" role="alert">
+              Usuario o contraseña incorrectos, o necesitás iniciar sesión para continuar.
+            </div>
           {{/if}}
-
           <form action="/users/login" method="POST">
             <div class="mb-3">
               <label for="username" class="form-label">Nombre de usuario</label>
-              <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa tu nombre de usuario"
-                required />
+              <input type="text" class="form-control" id="username" name="username" required />
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu contraseña"
-                required />
+              <input type="password" class="form-control" id="password" name="password" required />
             </div>
             <button type="submit" class="btn btn-primary">Iniciar sesión</button>
           </form>
@@ -111,18 +96,20 @@
   {{{body}}}
 
   <footer>
-    <p class="text-center">diseño por diaz moroni 2024</p>
+    <p class="text-center">Diseño por Diaz Moroni 2024</p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
 
   {{#if loginError}}
   <script>
-    var myModal = new bootstrap.Modal(document.getElementById('loginModal'));
-    myModal.show();
+    document.addEventListener('DOMContentLoaded', function () {
+      const modal = new bootstrap.Modal(document.getElementById('loginModal'));
+      modal.show();
+    });
   </script>
   {{/if}}
-
 </body>
 
 </html>

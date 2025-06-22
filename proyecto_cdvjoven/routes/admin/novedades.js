@@ -1,41 +1,40 @@
-const express = require('express');
-const router = express.Router();
-const novedadesModel = require('../../models/novedadesModel');
-var util = require('util');
-var cloudinary = require('cloudinary').v2;
-const uploader = util.promisify(cloudinary.uploader.upload);
-
-// Middleware para proteger la ruta
+// Middleware para proteger rutas admin
 function checkAuth(req, res, next) {
   if (req.session.user) {
     next();
   } else {
+    // Redirigir al home con loginError=1 para abrir modal y mostrar mensaje
     res.redirect('/?loginError=1');
   }
 }
+const express = require('express');
+const router = express.Router();
+const novedadesModel = require('../../models/novedadesModel');
+const util = require('util');
+const cloudinary = require('cloudinary').v2;
+const uploader = util.promisify(cloudinary.uploader.upload);
 
-router.get('/', checkAuth, async (req, res) => {
+
+// 🔒 Protege todas las rutas de este router
+router.use(checkAuth);
+
+// GET: Mostrar listado de novedades
+router.get('/', async (req, res) => {
   try {
     let novedades = await novedadesModel.getNovedades();
 
-  novedades = novedades.map(novedad => {
-    if (novedad.img_id) {
-      const imagen = cloudinary.image(novedad.img_id, {
-        width: 100,
-        height: 100,
-        crop: 'fill'
-      });
-      return {
-        ...novedad,
-      imagen
-    }
-    } else {
-      return {
-        ...novedad,
-        imagen:''
+    novedades = novedades.map(novedad => {
+      if (novedad.img_id) {
+        const imagen = cloudinary.image(novedad.img_id, {
+          width: 100,
+          height: 100,
+          crop: 'fill'
+        });
+        return { ...novedad, imagen };
+      } else {
+        return { ...novedad, imagen: '' };
       }
-    }
-  })
+    });
 
     novedades.forEach((n, i) => n.orden = i + 1);
 
@@ -57,34 +56,47 @@ router.get('/', checkAuth, async (req, res) => {
   }
 });
 
+// GET: Eliminar novedad
+router.get('/eliminar/:id', async (req, res) => {
+  try {
+    const novedad = await novedadesModel.getNovedadById(req.params.id);
 
+    // Si tiene imagen, borrarla de Cloudinary
+    if (novedad.img_id) {
+      await cloudinary.uploader.destroy(novedad.img_id);
+    }
 
-router.get('/eliminar/:id', checkAuth, async (req, res) => {
-  var id = req.params.id;
-  await novedadesModel.deleteNovedadById(id);
-  req.session.success = 'Novedad eliminada correctamente.';
-  res.redirect('/admin/novedades');
+    // Eliminar novedad de la base
+    await novedadesModel.deleteNovedadById(req.params.id);
+
+    req.session.success = 'Novedad eliminada correctamente.';
+    res.redirect('/admin/novedades');
+  } catch (error) {
+    console.error('Error al eliminar novedad:', error);
+    req.session.success = 'Error al eliminar la novedad.';
+    res.redirect('/admin/novedades');
+  }
 });
 
-router.get('/agregar', (req, res, next) => {
+
+// GET: Formulario agregar novedad
+router.get('/agregar', (req, res) => {
   res.render('admin/agregar', {
     layout: false
-  })
-})
+  });
+});
 
-//guardar el form de agregar
-router.post('/agregar', async (req, res, next) => {
+// POST: Agregar novedad
+router.post('/agregar', async (req, res) => {
   try {
-    var img_id = '';
+    let img_id = '';
     if (req.files && Object.keys(req.files).length > 0) {
-      imagen = req.files.imagen;
+      const imagen = req.files.imagen;
       img_id = (await uploader(imagen.tempFilePath)).public_id;
     }
 
-    console.log(req.body)
-
-    if (req.body.titulo != "" && req.body.subtitulo != "" && req.body.cuerpo != "") {
-      await novedadesModel.insertNovedad({...req.body, img_id});
+    if (req.body.titulo && req.body.subtitulo && req.body.cuerpo) {
+      await novedadesModel.insertNovedad({ ...req.body, img_id });
       req.session.success = 'Novedad agregada correctamente.';
       res.redirect('/admin/novedades');
     } else {
@@ -92,38 +104,66 @@ router.post('/agregar', async (req, res, next) => {
         layout: false,
         error: true,
         message: 'Todos los campos son requeridos'
-      })
+      });
     }
   } catch (error) {
-    console.log(error)
+    console.error(error);
     res.render('admin/agregar', {
       layout: false,
       error: true,
-      message: 'No se cargo la novedad'
-    })
+      message: 'No se cargó la novedad'
+    });
   }
 });
 
-router.get('/modificar/:id', async (req, res, next) => {
-  var id = req.params.id;
-  var novedad = await novedadesModel.getNovedadById(id);
-  console.log("variable novedad en ruta", novedad);
+
+// GET: Formulario modificar novedad
+router.get('/modificar/:id', async (req, res) => {
+  const novedad = await novedadesModel.getNovedadById(req.params.id);
+
+  let imagenUrl = '';
+  if (novedad.img_id) {
+    imagenUrl = cloudinary.url(novedad.img_id, {
+      width: 400,
+      crop: 'fill'
+    });
+  }
+
   res.render('admin/modificar', {
     layout: false,
-    novedad: novedad
+    novedad,
+    imagenUrl
   });
 });
-
-//modif la novedad
+// POST: Modificar novedad
 router.post('/modificar', async (req, res) => {
   try {
-    const { id, titulo, subtitulo, cuerpo } = req.body;
+    const { id, titulo, subtitulo, cuerpo, eliminarImagen } = req.body;
+    let obj = { titulo, subtitulo, cuerpo };
+
+    // Obtener novedad actual para saber img_id
+    const novedad = await novedadesModel.getNovedadById(id);
+
+    // Si se quiere eliminar la imagen actual
+    if (eliminarImagen === '1' && novedad.img_id) {
+      await cloudinary.uploader.destroy(novedad.img_id);
+      obj.img_id = null;  // borrar la referencia en la DB
+    }
+
+    // Si se sube una imagen nueva
+    if (req.files && req.files.imagenNueva) {
+      // Si existe imagen anterior, borrar
+      if (novedad.img_id) {
+        await cloudinary.uploader.destroy(novedad.img_id);
+      }
+      const imagen = req.files.imagenNueva;
+      const result = await uploader(imagen.tempFilePath);
+      obj.img_id = result.public_id;
+    }
 
     if (titulo && subtitulo && cuerpo) {
-      const obj = { titulo, subtitulo, cuerpo };
-      console.log("Datos a modificar:", obj);
       await novedadesModel.modificarNovedadById(obj, id);
-      req.session.success = 'La novedad se modificó correctamente';
+      req.session.success = 'La novedad se modificó correctamente.';
       res.redirect('/admin/novedades');
     } else {
       res.render('admin/modificar', {
@@ -143,6 +183,5 @@ router.post('/modificar', async (req, res) => {
     });
   }
 });
-
 
 module.exports = router;
