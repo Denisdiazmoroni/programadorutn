@@ -22,7 +22,15 @@ router.use(checkAuth);
 router.get('/', async (req, res) => {
   try {
     let novedades = await novedadesModel.getNovedades();
+    const query = req.query.q ? req.query.q.toLowerCase() : '';
 
+    if (query) {
+  novedades = novedades.filter(n => 
+    n.titulo.toLowerCase().includes(query) ||
+    n.subtitulo.toLowerCase().includes(query) ||
+    n.cuerpo.toLowerCase().includes(query)
+  );
+}
     novedades = novedades.map(novedad => {
       if (novedad.img_id) {
         const imagen = cloudinary.image(novedad.img_id, {
@@ -44,7 +52,8 @@ router.get('/', async (req, res) => {
     res.render('admin/novedades', {
       layout: false,
       novedades,
-      success
+      success,
+      query // <-- esto permite mostrar en el input el texto buscado
     });
   } catch (error) {
     console.error('Error al obtener novedades:', error);
